@@ -44,7 +44,7 @@ jobs:
     - name: Wait for parsed_mybatis.json
       run: |
         for i in {1..30}; do
-          if [ -f ./output/parsed_mybatis.json ]; then
+          if [ -f sample/output/parsed_mybatis.json ]; then
             echo "parsed_mybatis.json is ready."
             break
           fi
@@ -60,7 +60,7 @@ jobs:
     - name: Wait for logic_to_dao_mapping.json
       run: |
         for i in {1..30}; do
-          if [ -f ./output/logic_to_dao_mapping.json ]; then
+          if [ -f sample/output/logic_to_dao_mapping.json ]; then
             echo "logic_to_dao_mapping.json is ready."
             break
           fi
@@ -76,7 +76,7 @@ jobs:
     - name: Wait for crud_mapping.json
       run: |
         for i in {1..30}; do
-          if [ -f ./output/crud_mapping.json ]; then
+          if [ -f sample/output/crud_mapping.json ]; then
             echo "crud_mapping.json is ready."
             break
           fi

@@ -1,0 +1,42 @@
+name: Python Lint
+
+on:
+  push:
+    branches:
+      - main  # mainブランチへのプッシュで実行
+  workflow_dispatch:  # 手動実行を有効化
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. リポジトリのコードを取得
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Python のセットアップ
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      # 3. 必要なツールをインストール
+      - name: Install dependencies
+        run: |
+          pip install flake8 black isort mypy
+
+      # 4. Flake8 でスタイルチェック
+      - name: Run Flake8
+        run: flake8 sample/
+
+      # 5. Black でフォーマットチェック
+      - name: Run Black
+        run: black --check sample/
+
+      # 6. isort でインポートの順序をチェック
+      - name: Run isort
+        run: isort --check-only sample/
+
+      # 7. Mypy で型チェック
+      - name: Run Mypy
+        run: mypy sample/
