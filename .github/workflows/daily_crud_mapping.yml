@@ -12,6 +12,8 @@ on:
     paths:
       - 'input/**'
       - 'scripts/**'
+  # 手動実行
+  workflow_dispatch:
 
 jobs:
   generate-crud:
