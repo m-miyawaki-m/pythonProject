@@ -39,7 +39,7 @@ jobs:
     # 4. MyBatis XML Parser の実行と待ち合わせ
     - name: Run MyBatis XML Parser
       run: |
-        python scripts/step1_parse_mybatis_xml.py
+        python sample/step1_parse_mybatis_xml.py
 
     - name: Wait for parsed_mybatis.json
       run: |
@@ -55,7 +55,7 @@ jobs:
     # 5. Java Code Parser の実行と待ち合わせ
     - name: Run Java Code Parser
       run: |
-        python scripts/step2_parse_java_code.py
+        python sample/step2_parse_java_code.py
 
     - name: Wait for logic_to_dao_mapping.json
       run: |
@@ -71,7 +71,7 @@ jobs:
     # 6. CRUD Mapping の生成と待ち合わせ
     - name: Generate CRUD Mapping
       run: |
-        python scripts/step3_generate_crud_mapping.py
+        python sample/step3_generate_crud_mapping.py
 
     - name: Wait for crud_mapping.json
       run: |
