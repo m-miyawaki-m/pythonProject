@@ -1,0 +1,22 @@
+[
+    {
+        "logic_method": "fetchUserById",
+        "dao_method": "getUserById",
+        "tables": [
+            "users"
+        ],
+        "columns": [
+            "id, name, email"
+        ]
+    },
+    {
+        "logic_method": "addUser",
+        "dao_method": "insertUser",
+        "tables": [
+            "users"
+        ],
+        "columns": [
+            "name, email"
+        ]
+    }
+]
