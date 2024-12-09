@@ -20,9 +20,9 @@ def generate_crud_mapping(logic_to_dao, parsed_mybatis):
     return crud_mapping
 
 # JSONデータの読み込み
-logic_to_dao_file = "./output/logic_to_dao_mapping.json"
-parsed_mybatis_file = "./output/parsed_mybatis.json"
-crud_mapping_file = "./output/crud_mapping.json"
+logic_to_dao_file = "sample/output/logic_to_dao_mapping.json"
+parsed_mybatis_file = "sample/output/parsed_mybatis.json"
+crud_mapping_file = "sample/output/crud_mapping.json"
 
 logic_to_dao = load_json(logic_to_dao_file)
 parsed_mybatis = load_json(parsed_mybatis_file)

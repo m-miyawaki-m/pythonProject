@@ -24,8 +24,8 @@ def save_to_json(data, output_file):
         json.dump(data, file, indent=4, ensure_ascii=False)
 
 # 実行
-java_file_path = "./input/UserLogic.java"
-output_file = "./output/logic_to_dao_mapping.json"
+java_file_path = "sample/input/UserLogic.java"
+output_file = "sample/output/logic_to_dao_mapping.json"
 parsed_data = parse_java_file(java_file_path)
 save_to_json(parsed_data, output_file)
 print(f"解析結果を {output_file} に保存しました。")

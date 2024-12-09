@@ -36,8 +36,8 @@ def save_to_json(data, output_file):
         json.dump(data, file, indent=4, ensure_ascii=False)
 
 # 実行
-xml_file_path = "./input/mybatis_mapper.xml"
-output_file = "./output/parsed_mybatis.json"
+xml_file_path = "sample/input/mybatis_mapper.xml"
+output_file = "sample/output/parsed_mybatis.json"
 parsed_data = parse_mybatis_xml(xml_file_path)
 save_to_json(parsed_data, output_file)
 print(f"解析結果を {output_file} に保存しました。")
