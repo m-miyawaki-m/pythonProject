@@ -6,6 +6,9 @@ REM Pythonのパスを設定
 set PYTHON_PATH=python
 
 REM 各スクリプトの実行
+%PYTHON_PATH% step0_cleanup_output.py
+if errorlevel 1 exit /b 1
+
 %PYTHON_PATH% step1_parse_mybatis_xml.py
 if errorlevel 1 exit /b 1
 

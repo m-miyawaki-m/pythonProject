@@ -1,0 +1,22 @@
+[
+    {
+        "tag": "select",
+        "id": "getUserById",
+        "tables": [
+            "users"
+        ],
+        "columns": [
+            "id, name, email"
+        ]
+    },
+    {
+        "tag": "insert",
+        "id": "insertUser",
+        "tables": [
+            "users"
+        ],
+        "columns": [
+            "name, email"
+        ]
+    }
+]

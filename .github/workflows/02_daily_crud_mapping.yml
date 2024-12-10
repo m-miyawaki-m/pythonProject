@@ -3,15 +3,15 @@ name: Daily CRUD Mapping
 on:
   schedule:
     # 毎日午前0時に実行
-    - cron: '0 0 * * *'
+    - cron: "0 0 * * *"
   push:
     # mainブランチへのプッシュで実行
     branches:
       - main
     # 特定のファイルが変更された場合のみ実行
     paths:
-      - 'input/**'
-      - 'sample/**'
+      - "input/**"
+      - "sample/**"
   # 手動実行
   workflow_dispatch:
 
@@ -20,79 +20,89 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # 1. リポジトリをクローン
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      # 1. リポジトリをクローン
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    # 2. Python のセットアップ
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
+      # 2. Python のセットアップ
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
 
-    # 3. 必要な Python パッケージをインストール
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install lxml
+      # 3. 必要な Python パッケージをインストール
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install lxml
 
-    # 4. MyBatis XML Parser の実行と待ち合わせ
-    - name: Run MyBatis XML Parser
-      run: |
-        python sample/step1_parse_mybatis_xml.py
+      # 3-1. Clean up the output directory
+      - name: Run Clean up
+        run: |
+          python sample/step1_parse_mybatis_xml.py
 
-    - name: Wait for parsed_mybatis.json
-      run: |
-        for i in {1..30}; do
-          if [ -f sample/output/parsed_mybatis.json ]; then
-            echo "parsed_mybatis.json is ready."
-            break
+      # 4. MyBatis XML Parser の実行と待ち合わせ
+      - name: Run MyBatis XML Parser
+        run: |
+          python sample/step1_parse_mybatis_xml.py
+
+      # 4. MyBatis XML Parser の実行と待ち合わせ
+      - name: Run MyBatis XML Parser
+        run: |
+          python sample/step1_parse_mybatis_xml.py
+
+      - name: Wait for parsed_mybatis.json
+        run: |
+          for i in {1..30}; do
+            if [ -f sample/output/parsed_mybatis.json ]; then
+              echo "parsed_mybatis.json is ready."
+              break
+            fi
+            echo "Waiting for parsed_mybatis.json..."
+            sleep 10
+          done
+
+      # 5. Java Code Parser の実行と待ち合わせ
+      - name: Run Java Code Parser
+        run: |
+          python sample/step2_parse_java_code.py
+
+      - name: Wait for logic_to_dao_mapping.json
+        run: |
+          for i in {1..30}; do
+            if [ -f sample/output/logic_to_dao_mapping.json ]; then
+              echo "logic_to_dao_mapping.json is ready."
+              break
+            fi
+            echo "Waiting for logic_to_dao_mapping.json..."
+            sleep 10
+          done
+
+      # 6. CRUD Mapping の生成と待ち合わせ
+      - name: Generate CRUD Mapping
+        run: |
+          python sample/step3_generate_crud_mapping.py
+
+      - name: Wait for crud_mapping.json
+        run: |
+          for i in {1..30}; do
+            if [ -f sample/output/crud_mapping.json ]; then
+              echo "crud_mapping.json is ready."
+              break
+            fi
+            echo "Waiting for crud_mapping.json..."
+            sleep 10
+          done
+
+      # 7. 生成された結果を Git にコミット
+      - name: Commit and Push Changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add sample/output/
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Daily CRUD Mapping Update"
+            git push
           fi
-          echo "Waiting for parsed_mybatis.json..."
-          sleep 10
-        done
-
-    # 5. Java Code Parser の実行と待ち合わせ
-    - name: Run Java Code Parser
-      run: |
-        python sample/step2_parse_java_code.py
-
-    - name: Wait for logic_to_dao_mapping.json
-      run: |
-        for i in {1..30}; do
-          if [ -f sample/output/logic_to_dao_mapping.json ]; then
-            echo "logic_to_dao_mapping.json is ready."
-            break
-          fi
-          echo "Waiting for logic_to_dao_mapping.json..."
-          sleep 10
-        done
-
-    # 6. CRUD Mapping の生成と待ち合わせ
-    - name: Generate CRUD Mapping
-      run: |
-        python sample/step3_generate_crud_mapping.py
-
-    - name: Wait for crud_mapping.json
-      run: |
-        for i in {1..30}; do
-          if [ -f sample/output/crud_mapping.json ]; then
-            echo "crud_mapping.json is ready."
-            break
-          fi
-          echo "Waiting for crud_mapping.json..."
-          sleep 10
-        done
-
-    # 7. 生成された結果を Git にコミット
-    - name: Commit and Push Changes
-      run: |
-        git config user.name "github-actions[bot]"
-        git config user.email "github-actions[bot]@users.noreply.github.com"
-        git add sample/output/
-        if git diff --cached --quiet; then
-          echo "No changes to commit."
-        else
-          git commit -m "Daily CRUD Mapping Update"
-          git push
-        fi

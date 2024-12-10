@@ -1,0 +1,12 @@
+[
+    {
+        "logic_method": "fetchUserById",
+        "dao_name": "userDAO",
+        "dao_method": "getUserById"
+    },
+    {
+        "logic_method": "addUser",
+        "dao_name": "userDAO",
+        "dao_method": "insertUser"
+    }
+]
