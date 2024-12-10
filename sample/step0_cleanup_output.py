@@ -7,6 +7,7 @@ OUTPUT_DIR = "sample/output/"
 BK_DIR = os.path.join(OUTPUT_DIR, "bk")
 MAX_BACKUPS = 5
 
+
 # JSONファイルをバックアップに移動する関数
 def backup_json_files():
     # 出力ディレクトリをチェック
@@ -16,7 +17,7 @@ def backup_json_files():
 
     # バックアップ先ディレクトリを作成
     os.makedirs(BK_DIR, exist_ok=True)
-    
+
     # 現在の日時をフォーマットしてサブディレクトリ名に使用
     current_time = datetime.now().strftime("%Y%m%d%H%M")
     backup_dir = os.path.join(BK_DIR, current_time)
@@ -33,10 +34,13 @@ def backup_json_files():
     # 古いバックアップを削除
     cleanup_old_backups()
 
+
 # 古いバックアップを削除する関数
 def cleanup_old_backups():
     # バックアップディレクトリ内のサブディレクトリを取得
-    backups = [d for d in os.listdir(BK_DIR) if os.path.isdir(os.path.join(BK_DIR, d))]
+    backups = [
+        d for d in os.listdir(BK_DIR) if os.path.isdir(os.path.join(BK_DIR, d))
+    ]
     backups.sort()  # 古い順に並べ替え
 
     # 保持数を超えた古いバックアップを削除
@@ -45,6 +49,7 @@ def cleanup_old_backups():
         oldest_backup_path = os.path.join(BK_DIR, oldest_backup)
         shutil.rmtree(oldest_backup_path)
         print(f"古いバックアップ {oldest_backup_path} を削除しました。")
+
 
 if __name__ == "__main__":
     backup_json_files()
