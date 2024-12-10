@@ -1,6 +1,7 @@
-import xml.etree.ElementTree as ET
-import re
 import json
+import re
+import xml.etree.ElementTree as ET
+
 
 def parse_mybatis_xml(file_path):
     tree = ET.parse(file_path)
@@ -16,26 +17,35 @@ def parse_mybatis_xml(file_path):
             # テーブル名の抽出
             table_pattern = r"FROM\s+(\w+)|INTO\s+(\w+)|UPDATE\s+(\w+)"
             tables = re.findall(table_pattern, sql_content)
-            table_names = [table for match in tables for table in match if table]
+            table_names = [
+                table for match in tables for table in match if table
+            ]
 
             # カラム名の抽出
-            column_pattern = r"SELECT\s+(.*?)\s+FROM|INSERT\s+INTO\s+\w+\s+\((.*?)\)|UPDATE\s+\w+\s+SET\s+(.*?)\="
+            column_pattern = (
+                r"SELECT\s+(.*?)\s+FROM|INSERT\s+INTO\s"
+                r"+\w+\s+\((.*?)\)|UPDATE\s+\w+\s+SET\s+(.*?)\="
+            )
             columns = re.findall(column_pattern, sql_content)
             column_names = [col for match in columns for col in match if col]
 
-            extracted_data.append({
-                "tag": element.tag,
-                "id": element.attrib.get("id"),
-                "tables": table_names,
-                "columns": column_names
-            })
+            extracted_data.append(
+                {
+                    "tag": element.tag,
+                    "id": element.attrib.get("id"),
+                    "tables": table_names,
+                    "columns": column_names,
+                }
+            )
 
     return extracted_data
+
 
 # 結果を保存
 def save_parsed_data(data, output_file):
     with open(output_file, "w", encoding="utf-8") as file:
         json.dump(data, file, indent=4, ensure_ascii=False)
+
 
 # 実行
 xml_file_path = "./sample/file/mybatis_mapper.xml"

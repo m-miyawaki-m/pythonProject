@@ -1,0 +1,11 @@
+{
+    "python.linting.enabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.linting.mypyEnabled": true,
+    "python.formatting.provider": "black",
+    "editor.formatOnSave": true,
+    "python.sortImports.args": ["--profile", "black"],
+    "python.linting.flake8Args": [
+        "--max-line-length=88"  // Blackのデフォルトライン長に合わせる
+    ]
+}
