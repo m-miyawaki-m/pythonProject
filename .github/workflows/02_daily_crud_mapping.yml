@@ -11,7 +11,7 @@ on:
     # 特定のファイルが変更された場合のみ実行
     paths:
       - 'input/**'
-      - 'scripts/**'
+      - 'sample/**'
   # 手動実行
   workflow_dispatch:
 
@@ -89,7 +89,7 @@ jobs:
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
-        git add output/
+        git add sample/output/
         if git diff --cached --quiet; then
           echo "No changes to commit."
         else
