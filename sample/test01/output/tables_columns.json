@@ -1,0 +1,79 @@
+{
+    "mybatis_mapper.xml": {
+        "select": {
+            "getUserById": {
+                "unknown_table": {
+                    "columns": [
+                        "id",
+                        "name",
+                        "email"
+                    ],
+                    "parameters": [],
+                    "condition": "",
+                    "source": ""
+                }
+            }
+        },
+        "insert": {
+            "insertUser": {}
+        },
+        "delete": {},
+        "update": {},
+        "sql": {}
+    },
+    "UserDataMapper.xml": {
+        "select": {
+            "findAll": {
+                "unknown_table": {
+                    "columns": [
+                        "id",
+                        "name",
+                        "birth_year",
+                        "birth_month",
+                        "birth_day",
+                        "sex",
+                        "sex_value"
+                    ],
+                    "parameters": [],
+                    "condition": "",
+                    "source": ""
+                }
+            },
+            "findById": {
+                "unknown_table": {
+                    "columns": [
+                        "id",
+                        "name",
+                        "birth_year",
+                        "birth_month",
+                        "birth_day",
+                        "sex"
+                    ],
+                    "parameters": [],
+                    "condition": "",
+                    "source": ""
+                }
+            },
+            "findMaxId": {
+                "unknown_table": {
+                    "columns": [
+                        "NVL(NVL)"
+                    ],
+                    "parameters": [],
+                    "condition": "",
+                    "source": ""
+                }
+            }
+        },
+        "insert": {
+            "create": {}
+        },
+        "delete": {
+            "deleteById": {}
+        },
+        "update": {
+            "update": {}
+        },
+        "sql": {}
+    }
+}

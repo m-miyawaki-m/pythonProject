@@ -1,0 +1,15 @@
+<mapper namespace="exampleMapper">
+    <select id="getUserById" resultType="User">
+        SELECT
+        id,
+        name,
+        email
+        FROM users
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insertUser">
+        INSERT INTO users (name, email)
+        VALUES (#{name}, #{email})
+    </insert>
+</mapper>
