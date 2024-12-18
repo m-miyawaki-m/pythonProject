@@ -12,12 +12,6 @@ def read_xml_files(directory):
             xml_files[file_name] = os.path.join(directory, file_name)
     return xml_files
 
-def save_to_json(data, output_path):
-    """
-    辞書をJSON形式で保存する。
-    """
-    with open(output_path, 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=4, ensure_ascii=False)
 
 def save_to_csv(data, output_path):
     """

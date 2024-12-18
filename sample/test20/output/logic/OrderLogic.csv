@@ -1,0 +1,4 @@
+class_name,method_name,called_method_1
+OrderLogic,getAllProducts,findAllProducts
+OrderLogic,getProductById,findProductById
+OrderLogic,addProduct,insertProduct

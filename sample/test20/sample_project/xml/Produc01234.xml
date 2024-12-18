@@ -1,0 +1,11 @@
+<mapper namespace="ProductMapper">
+    <select id="findAllProducts">
+        SELECT * FROM products;
+    </select>
+    <select id="findProductById">
+        SELECT * FROM products WHERE id = #{id};
+    </select>
+    <insert id="insertProduct">
+        INSERT INTO products (id, name, price) VALUES (#{id}, #{name}, #{price});
+    </insert>
+</mapper>
