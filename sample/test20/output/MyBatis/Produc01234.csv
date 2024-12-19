@@ -1,0 +1,4 @@
+file_name,namespace,tag,id,sql
+Produc01234.xml,ProductMapper,select,findAllProducts,SELECT * FROM products;
+Produc01234.xml,ProductMapper,select,findProductById,SELECT * FROM products WHERE id = #{id};
+Produc01234.xml,ProductMapper,insert,insertProduct,"INSERT INTO products (id, name, price) VALUES (#{id}, #{name}, #{price});"
