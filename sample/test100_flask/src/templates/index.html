@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .sql-preview {
+            white-space: pre-wrap;
+            overflow: hidden;
+            max-height: 3em; /* 初期表示を3行に制限 */
+            line-height: 1.5em;
+            cursor: pointer;
+        }
+        .sql-preview.expand {
+            max-height: none;
+            cursor: auto;
+        }
+    </style>
+    <script>
+        function toggleSQL(el) {
+            el.classList.toggle("expand");
+        }
+    </script>
+</head>
+<body>
+    <h1>SQL Viewer</h1>
+    <form method="get">
+        <input type="text" name="query" placeholder="検索..." value="{{ query }}">
+        <button type="submit">検索</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>ファイル名</th>
+                <th>タグ名</th>
+                <th>MyBatis ID</th>
+                <th>SQL文</th>
+                <th>行数</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                <td>{{ row.file_name }}</td>
+                <td>{{ row.tag_name }}</td>
+                <td>{{ row.mybatis_id }}</td>
+                <td>
+                    <div class="sql-preview" onclick="toggleSQL(this)">
+                        {{ row.sql }}
+                    </div>
+                </td>
+                <td>{{ row.line_count }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
