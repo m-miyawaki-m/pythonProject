@@ -1,0 +1,14 @@
+[
+    {
+        "file_name": "UserMapper.xml",
+        "tag_name": "select",
+        "mybatis_id": "findAll",
+        "sql": "SELECT * FROM USERS WHERE id = #{id}"
+    },
+    {
+        "file_name": "OrderMapper.xml",
+        "tag_name": "insert",
+        "mybatis_id": "insertOrder",
+        "sql": "INSERT INTO ORDERS (id, amount) VALUES (#{id}, #{amount})"
+    }
+]

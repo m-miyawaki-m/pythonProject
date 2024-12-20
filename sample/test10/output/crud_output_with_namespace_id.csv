@@ -1,0 +1,3 @@
+業務操作,呼び出し元メソッド,呼び出し先メソッド,DAO メソッド,CRUD 種別,MyBatis Namespace,MyBatis Id,パラメータ
+UserLogic,createUser,userDao.insertUser,insert,Create,"""UserMapper","insertUser""","ClassCreator(arguments=[MemberReference(member=name, postfix_operators=[], prefix_operators=[], qualifier=, selectors=[]), MemberReference(member=age, postfix_operators=[], prefix_operators=[], qualifier=, selectors=[])], body=None, constructor_type_arguments=None, postfix_operators=[], prefix_operators=[], qualifier=None, selectors=[], type=ReferenceType(arguments=None, dimensions=None, name=User, sub_type=None))"
+UserLogic,getUserDao,userDao.getUserById,selectOne,Read,"""UserMapper","getUserById""","MemberReference(member=id, postfix_operators=[], prefix_operators=[], qualifier=, selectors=[])"

@@ -1,0 +1,4 @@
+class_name,method_name,called_method_1
+UserLogic,getAllUsers,findAllUsers
+UserLogic,getUserById,findUserById
+UserLogic,addUser,insertUser

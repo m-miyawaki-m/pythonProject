@@ -1,0 +1,4 @@
+class_name,method_name,sql_operation,parameters
+ProductDao,findAllProducts,select,"Literal(postfix_operators=[], prefix_operators=[], qualifier=None, selectors=[], value=""ProductMapper.findAllProducts"")"
+ProductDao,findProductById,select,"Literal(postfix_operators=[], prefix_operators=[], qualifier=None, selectors=[], value=""ProductMapper.findProductById""), id"
+ProductDao,insertProduct,insert,"Literal(postfix_operators=[], prefix_operators=[], qualifier=None, selectors=[], value=""ProductMapper.insertProduct""), product"
