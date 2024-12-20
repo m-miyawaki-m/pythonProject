@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.sql-preview {
+    position: relative;
+}
+
+.sql-preview pre {
+    background: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ccc;
+    overflow: auto;
+    max-height: 200px;
+}

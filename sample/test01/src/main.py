@@ -1,10 +1,9 @@
 import os
-from io_handler import save_to_json, save_to_csv, read_xml_files
+from io_handler import save_to_csv, read_xml_files
 from parser import parse_mybatis_xml
 
 def main():
     input_dir = "./sample/test01/input/mybatis_xml"  # XMLファイルのディレクトリ
-    json_output_file = "./sample/test01/output/tables_columns.json"
     csv_output_file = "./sample/test01/output/tables_columns.csv"
 
     # XMLファイルを読み取る
@@ -18,10 +17,8 @@ def main():
         all_files_data[file_name] = file_data
 
     # 結果を保存
-    save_to_json(all_files_data, json_output_file)
     save_to_csv(all_files_data, csv_output_file)
 
-    print(f"JSONファイルに保存しました: {json_output_file}")
     print(f"CSVファイルに保存しました: {csv_output_file}")
 
 if __name__ == "__main__":

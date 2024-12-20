@@ -1,0 +1,7 @@
+file_name,file_path,last_modified,property
+ProductDao.java,./sample/test20/sample_project\dao\ProductDao.java,1734532637.4547524,DAO
+UserDao.java,./sample/test20/sample_project\dao\UserDao.java,1734532626.0141752,DAO
+OrderLogic.java,./sample/test20/sample_project\logic\OrderLogic.java,1734532654.4489636,LOGIC
+UserLogic.java,./sample/test20/sample_project\logic\UserLogic.java,1734532645.543895,LOGIC
+Produc01234.xml,./sample/test20/sample_project\xml\Produc01234.xml,1734533785.5765102,MyBatis
+UserMa01234.xml,./sample/test20/sample_project\xml\UserMa01234.xml,1734533732.7926362,MyBatis

@@ -1,0 +1,4 @@
+class_name,method_name,sql_operation,parameters
+UserDao,findAllUsers,select,"Literal(postfix_operators=[], prefix_operators=[], qualifier=None, selectors=[], value=""UserMapper.findAllUsers"")"
+UserDao,findUserById,select,"Literal(postfix_operators=[], prefix_operators=[], qualifier=None, selectors=[], value=""UserMapper.findUserById""), id"
+UserDao,insertUser,insert,"Literal(postfix_operators=[], prefix_operators=[], qualifier=None, selectors=[], value=""UserMapper.insertUser""), user"

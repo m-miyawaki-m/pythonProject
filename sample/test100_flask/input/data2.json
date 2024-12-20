@@ -1,0 +1,14 @@
+[
+    {
+        "file_name": "ComplexQuery1.sql",
+        "tag_name": "select",
+        "mybatis_id": "UserOrderPaymentReport",
+        "sql": "-- ユーザー、注文、支払い情報を統合した複雑なレポート作成\nSELECT \n    u.id AS user_id,\n    u.name AS user_name,\n    u.email AS user_email,\n    u.phone_number AS user_phone,\n    u.address AS user_address,\n    u.date_of_birth AS user_dob,\n    o.order_id,\n    o.order_date,\n    o.total_amount AS order_total,\n    o.status AS order_status,\n    p.payment_id,\n    p.payment_date,\n    p.amount AS payment_amount,\n    p.payment_method,\n    p.status AS payment_status,\n    (CASE \n        WHEN p.status = 'PAID' THEN 'Complete'\n        WHEN p.status = 'PENDING' THEN 'Incomplete'\n        ELSE 'Error'\n     END) AS payment_state,\n    (\n        SELECT COUNT(op.order_id)\n        FROM order_products op\n        WHERE op.order_id = o.order_id\n    ) AS product_count,\n    (\n        SELECT SUM(op.price * op.quantity)\n        FROM order_products op\n        WHERE op.order_id = o.order_id\n    ) AS calculated_order_total,\n    (o.total_amount - COALESCE(p.amount, 0)) AS outstanding_balance\nFROM \n    users u\nINNER JOIN \n    orders o ON u.id = o.user_id\nLEFT JOIN \n    payments p ON o.order_id = p.order_id\nWHERE \n    u.is_active = TRUE\n    AND o.order_date >= '2023-01-01'\n    AND o.order_date <= '2023-12-31'\n    AND (p.payment_date IS NULL OR p.payment_date <= '2023-12-31')\nORDER BY \n    u.name ASC, o.order_date DESC;"
+    },
+    {
+        "file_name": "ComplexQuery2.sql",
+        "tag_name": "select",
+        "mybatis_id": "UserPaymentOrderSummary",
+        "sql": "-- ユーザーに関連するサブクエリを用いた支払い情報\nWITH user_payments AS (\n    SELECT \n        u.id AS user_id,\n        u.name AS user_name,\n        SUM(p.amount) AS total_paid,\n        COUNT(p.payment_id) AS payment_count,\n        AVG(p.amount) AS average_payment,\n        MAX(p.payment_date) AS last_payment_date\n    FROM \n        users u\n    LEFT JOIN \n        payments p ON u.id = p.user_id\n    WHERE \n        p.payment_date IS NOT NULL\n    GROUP BY \n        u.id, u.name\n),\norder_summary AS (\n    SELECT \n        o.user_id,\n        COUNT(o.order_id) AS order_count,\n        SUM(o.total_amount) AS total_order_value,\n        MAX(o.order_date) AS last_order_date\n    FROM \n        orders o\n    GROUP BY \n        o.user_id\n)\nSELECT \n    u.user_id,\n    u.user_name,\n    u.total_paid,\n    u.payment_count,\n    u.average_payment,\n    u.last_payment_date,\n    os.order_count,\n    os.total_order_value,\n    os.last_order_date\nFROM \n    user_payments u\nLEFT JOIN \n    order_summary os ON u.user_id = os.user_id\nWHERE \n    u.total_paid > 1000\nORDER BY \n    u.total_paid DESC;"
+    }
+]
